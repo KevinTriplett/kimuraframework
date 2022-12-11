@@ -35,6 +35,12 @@ module Kimurai::BrowserBuilder
           driver_options.add_option(:debuggerAddress, @config[:debugger_address])
         end
 
+        # user data dir
+        if dir = @config[:user_data_dir].presence
+          driver_options.args << "--user-data-dir=#{dir}"
+          logger.debug "BrowserBuilder (selenium_chrome): set user-data-dir"
+        end
+
         # Window size
         if size = @config[:window_size].presence
           driver_options.args << "--window-size=#{size.join(',')}"
